@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using MoviesApi.Authentication;
 using MoviesApi.DTO;
@@ -23,15 +24,17 @@ namespace MoviesApi.Controllers
     {
         private UserManager<ApplicationUser> userManager;
         private SignInManager <ApplicationUser> signManager;
+        private readonly ILogger<AccountController> logger;
         private IUsers users;
 
 
         public AccountController(UserManager<ApplicationUser> userManager,
-            SignInManager <ApplicationUser> signManager, IUsers users)
+            SignInManager <ApplicationUser> signManager, IUsers users, ILogger<AccountController> logger)
         { 
        
             this.userManager = userManager;
             this.signManager = signManager;
+            this.logger= logger;
             this.users = users;
         }
         [HttpPost("/register")]
@@ -47,6 +50,7 @@ namespace MoviesApi.Controllers
             };
             try
             {
+                logger.LogInformation("New user has been created by Admin");
                 var result = await userManager.CreateAsync(user, register.Password);
                 await userManager.AddToRoleAsync(user, Role);
                 return Ok(result);
@@ -65,6 +69,7 @@ namespace MoviesApi.Controllers
                 var u = await userManager.FindByIdAsync(user.Id);
                 if (u != null)
                 {
+                    logger.LogInformation("Password of a user has been changed");
                     await userManager.ChangePasswordAsync(u, user.CurrentPassword, user.NewPassword);
                    
                 }
@@ -82,6 +87,7 @@ namespace MoviesApi.Controllers
             var u = await userManager.FindByEmailAsync(login.Email);
             if(u!=null && await userManager.CheckPasswordAsync(u, login.Password))
             {
+                logger.LogInformation("user/admin logged in");
                 var role = await userManager.GetRolesAsync(u);
                 IdentityOptions options = new IdentityOptions();
 
@@ -114,6 +120,7 @@ namespace MoviesApi.Controllers
         [HttpGet("/getusers")]
         public  ActionResult<List<UsersDTO>> DisplayUsers()
         {
+            logger.LogInformation("List of Actors is displayed.");
             var u=this.users.GetUsers();
             return Mapper.Map<List<UsersDTO>>(u);
 
@@ -121,13 +128,14 @@ namespace MoviesApi.Controllers
         [HttpPut("/update")]
         public ActionResult UpdateProfile(ApplicationUser user)
         {
-
+            logger.LogInformation("Changes made in user profile");
             this.users.UpdateProfile(user);
             return Ok(user);
         }
         [HttpDelete("/delete/{id}")]
         public ActionResult DeleteProfile(string id)
         {
+            logger.LogInformation("User profile is deleted");
             this.users.DeleteProfile(id);
             return Ok("Deleted");
         }
