@@ -57,6 +57,25 @@ namespace MoviesApi.Controllers
             }
         }
 
+        [HttpPut("/change-pwd")]
+        public async Task<ActionResult> ChangePassword(ChangePassword user)
+        {
+            try
+            {
+                var u = await userManager.FindByIdAsync(user.Id);
+                if (u != null)
+                {
+                    await userManager.ChangePasswordAsync(u, user.CurrentPassword, user.NewPassword);
+                   
+                }
+                return Ok(u);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
         [HttpPost("/login")]
         public async Task<ActionResult> LoginUser(Login login)
         {
@@ -93,7 +112,7 @@ namespace MoviesApi.Controllers
         }
 
         [HttpGet("/getusers")]
-        public ActionResult<List<UsersDTO>> DisplayUsers()
+        public  ActionResult<List<UsersDTO>> DisplayUsers()
         {
             var u=this.users.GetUsers();
             return Mapper.Map<List<UsersDTO>>(u);
@@ -104,12 +123,6 @@ namespace MoviesApi.Controllers
         {
 
             this.users.UpdateProfile(user);
-            return Ok(user);
-        }
-        [HttpPut("/changepwd")]
-        public ActionResult ChangePassword(ApplicationUser user)
-        {
-            this.users.ChangePassword(user);
             return Ok(user);
         }
         [HttpDelete("/delete/{id}")]

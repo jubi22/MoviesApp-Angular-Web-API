@@ -10,7 +10,6 @@ namespace MoviesApi.Services
     {
         public List<ApplicationUser> GetUsers();
         public void UpdateProfile(ApplicationUser u);
-        public void ChangePassword(ApplicationUser u);
         public void DeleteProfile(string id);
 
         public ApplicationUser GetUserByID(string id);

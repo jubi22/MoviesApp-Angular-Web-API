@@ -29,15 +29,6 @@ namespace MoviesApi.Services
             }
             dbcontext.SaveChanges();
         }
-        public void ChangePassword(ApplicationUser user)
-        {
-            ApplicationUser u = dbcontext.ApplicationUsers.Where(t => t.Id == user.Id).FirstOrDefault();
-            if (u != null)
-            {
-                u.PasswordHash = user.PasswordHash;
-            }
-            dbcontext.SaveChanges();
-        }
         public void DeleteProfile(string id)
         {
             var u = this.dbcontext.ApplicationUsers.Where(t => t.Id == id).FirstOrDefault();

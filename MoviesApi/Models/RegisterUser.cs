@@ -8,6 +8,8 @@ namespace MoviesApi.Models
 {
     public class RegisterUser
     {
+        public string Id { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string UserName { get; set; }
