@@ -41,7 +41,7 @@ namespace MoviesApi
             services.AddScoped<IMovies, MoviesService>();
             services.AddScoped<IUsers, UsersService>();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddRoles<IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(t=> { t.User.AllowedUserNameCharacters = string.Empty; }).AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores
                 <MovieDBContext>().AddDefaultTokenProviders();
             services.AddAuthentication(t =>

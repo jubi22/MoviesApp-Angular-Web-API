@@ -57,6 +57,7 @@ namespace MoviesApi.Controllers
             }
             catch(Exception x)
             {
+                logger.LogError("Registration failed due to some error");
                 throw x;
             }
         }
@@ -77,6 +78,7 @@ namespace MoviesApi.Controllers
             }
             catch(Exception e)
             {
+                logger.LogError("Failed");
                 throw e;
             }
         }
@@ -113,6 +115,7 @@ namespace MoviesApi.Controllers
             }
             else 
             {
+                logger.LogError("Login failed!");
                 return Ok("Failed");
             }
         }
@@ -137,7 +140,7 @@ namespace MoviesApi.Controllers
         {
             logger.LogInformation("User profile is deleted");
             this.users.DeleteProfile(id);
-            return Ok("Deleted");
+            return Ok(users);
         }
         [HttpGet("/userid/{id}")]
         public ActionResult GetUserID(string id)

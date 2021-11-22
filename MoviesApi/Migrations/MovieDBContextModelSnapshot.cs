@@ -44,6 +44,22 @@ namespace MoviesApi.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "c96ccb09-5e11-4acd-8379-201c041c63d1",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "84e7dfef-683c-4113-8f58-e4d87ff8db91",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -200,6 +216,13 @@ namespace MoviesApi.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "b74ddd14-6340-4840-95c2-db12554843e5",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -270,6 +293,23 @@ namespace MoviesApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "b74ddd14-6340-4840-95c2-db12554843e5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "fa29feeb-bf52-4e7e-b78a-7fa500eb3bd0",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBLwIJ/NvDrtibSUdy6N3yLWN7iz0gFOV8WULe6+E4IaXXPMte51TjYbgSW7XovUcg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4039cae8-d7ce-46fa-813f-e2e7af813a4d",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

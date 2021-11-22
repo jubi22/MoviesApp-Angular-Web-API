@@ -69,7 +69,7 @@ namespace MoviesApi.Controllers
         {
             logger.LogInformation("Movie is deleted by Admin");
             this.movies.DeleteMovie(id);
-            return Ok("deleted");
+            return Ok(movies);
         }
     }
 }

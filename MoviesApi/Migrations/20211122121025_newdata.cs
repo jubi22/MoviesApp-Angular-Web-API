@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MoviesApi.Migrations
 {
-    public partial class latest : Migration
+    public partial class newdata : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -193,6 +193,26 @@ namespace MoviesApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "1", "c96ccb09-5e11-4acd-8379-201c041c63d1", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "2", "84e7dfef-683c-4113-8f58-e4d87ff8db91", "User", "USER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "DOB" },
+                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "fa29feeb-bf52-4e7e-b78a-7fa500eb3bd0", "ApplicationUser", "admin@gmail.com", false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEBLwIJ/NvDrtibSUdy6N3yLWN7iz0gFOV8WULe6+E4IaXXPMte51TjYbgSW7XovUcg==", null, false, "4039cae8-d7ce-46fa-813f-e2e7af813a4d", false, "Admin", null });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "UserId", "RoleId" },
+                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", "1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
