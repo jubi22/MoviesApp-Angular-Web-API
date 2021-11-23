@@ -88,9 +88,9 @@ namespace MoviesApi.Services
             }
             dBContext.SaveChanges();
         }
-        public void DeleteCastedMovie(int id)
+        public void DeleteCastedMovie(int movieid, string userid)
         {
-            var m = this.dBContext.Movies_Actors.Where(t => t.MovieID == id).FirstOrDefault();
+            var m = this.dBContext.Movies_Actors.Where(t => t.MovieID == movieid && t.UserID == userid).FirstOrDefault();
             dBContext.Remove(m);
             dBContext.SaveChanges();
         }

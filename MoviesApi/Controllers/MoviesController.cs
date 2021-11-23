@@ -72,10 +72,10 @@ namespace MoviesApi.Controllers
             return Ok(movies);
         }
 
-        [HttpDelete("/delete-casted/{id}")]
-        public ActionResult DeleteCastedMovie(int id)
+        [HttpDelete("/delete-casted/{movieid}/{userid}")]
+        public ActionResult DeleteCastedMovie(int movieid,string userid)
         {
-            this.movies.DeleteCastedMovie(id);
+            this.movies.DeleteCastedMovie(movieid, userid);
             return Ok("deleted casting");
         }
     }

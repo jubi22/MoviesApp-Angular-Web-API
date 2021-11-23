@@ -16,6 +16,6 @@ namespace MoviesApi.Services
         public void CastMovie(Movies_Actors movies_Actors);
         public void UpdateMovie(Movies movies);
         public void DeleteMovie(int id);
-        public void DeleteCastedMovie(int id);
+        public void DeleteCastedMovie(int movieid, string userid);
     }
 }
