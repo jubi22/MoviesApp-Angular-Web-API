@@ -88,5 +88,11 @@ namespace MoviesApi.Services
             }
             dBContext.SaveChanges();
         }
+        public void DeleteCastedMovie(int id)
+        {
+            var m = this.dBContext.Movies_Actors.Where(t => t.MovieID == id).FirstOrDefault();
+            dBContext.Remove(m);
+            dBContext.SaveChanges();
+        }
     }
 }

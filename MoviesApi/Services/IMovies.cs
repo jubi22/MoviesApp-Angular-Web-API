@@ -14,10 +14,8 @@ namespace MoviesApi.Services
         public List<MoviesDTO> GetMovieByID(int id);
         public List<MoviesDTO> GetActorByID(string id);
         public void CastMovie(Movies_Actors movies_Actors);
-
         public void UpdateMovie(Movies movies);
-
         public void DeleteMovie(int id);
-
+        public void DeleteCastedMovie(int id);
     }
 }

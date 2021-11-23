@@ -71,5 +71,12 @@ namespace MoviesApi.Controllers
             this.movies.DeleteMovie(id);
             return Ok(movies);
         }
+
+        [HttpDelete("/delete-casted/{id}")]
+        public ActionResult DeleteCastedMovie(int id)
+        {
+            this.movies.DeleteCastedMovie(id);
+            return Ok("deleted casting");
+        }
     }
 }
